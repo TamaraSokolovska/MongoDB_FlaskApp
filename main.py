@@ -1,7 +1,6 @@
 from flask import Flask
 import sqlite3
 import pandas as pd
-from tabulate import tabulate
 from IPython.display import display
 app = Flask(__name__)
 import re
