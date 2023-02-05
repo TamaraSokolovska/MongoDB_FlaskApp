@@ -1,0 +1,62 @@
+<html>
+  <head>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <tr><td>
+     <button id="clear_data" type='button'> Clear Data</button>
+        <button id="insert_data" type='button'> Insert Data</button>
+        <a href="/show_data"><button type="button">Show Data </button></a>
+     <div id='response'></div>
+    </td></tr>
+  </body>
+  <script>
+   $(document).ready(function() {
+      $("#clear_data").click(function(event){
+         var the_id = event.target.id;
+         $.ajax({
+            url: "/clear_data",
+            type: "get",
+            data: {button_id: the_id},
+           success: function(response) {
+           $("#response").html(response);
+         },
+          error: function(xhr) {
+        //Do Something to handle error
+        }
+       });
+     });
+     $("#insert_data").click(function(event){
+         var the_id = event.target.id;
+         $.ajax({
+            url: "/insert_to_mongo",
+            type: "get",
+            data: {button_id: the_id},
+           success: function(response) {
+           $("#response").html(response);
+         },
+          error: function(xhr) {
+        //Do Something to handle error
+        }
+       });
+     });
+
+      $("#show_data").click(function(event){
+         var the_id = event.target.id;
+         $.ajax({
+            url: "/show_data",
+            type: "get",
+            data: {button_id: the_id},
+           success: function(response) {
+           $("#response").html(response);
+         },
+          error: function(xhr) {
+        //Do Something to handle error
+        }
+       });
+     });
+
+
+   });
+  </script>
+</html>
