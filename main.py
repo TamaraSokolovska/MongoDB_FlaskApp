@@ -42,7 +42,6 @@ def clear_data():
     connector = sqlite3.connect('semos_companies_data.db')
     df = pd.read_sql("SELECT * FROM companies", con = connector)
     df['company_name_cleaned']= df['name'].apply(transformString)
-    display(df)
     df.to_sql(name = 'companies',if_exists = 'replace',con = connector, index = False)
     return "Finished transforming the data and writing to SQL database"
 

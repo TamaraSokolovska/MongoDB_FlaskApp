@@ -17,7 +17,6 @@
          $.ajax({
             url: "/clear_data",
             type: "get",
-            data: {button_id: the_id},
            success: function(response) {
            $("#response").html(response);
          },
@@ -31,22 +30,6 @@
          $.ajax({
             url: "/insert_to_mongo",
             type: "get",
-            data: {button_id: the_id},
-           success: function(response) {
-           $("#response").html(response);
-         },
-          error: function(xhr) {
-        //Do Something to handle error
-        }
-       });
-     });
-
-      $("#show_data").click(function(event){
-         var the_id = event.target.id;
-         $.ajax({
-            url: "/show_data",
-            type: "get",
-            data: {button_id: the_id},
            success: function(response) {
            $("#response").html(response);
          },
