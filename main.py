@@ -15,12 +15,14 @@ import json
 
 
 def transformString(st):
+    """Funkcija za procistuvanje na iminjata na kompaniite od nesakani karakteri"""
     transform1 =  re.sub(r'\(.*\)', '', st)
     transform2 = re.sub(r',.*','',transform1)
     return transform2.replace(' - ','').replace('LIMITED', '').replace ('limited', '').replace('Limited', '').replace('LTD.', '').replace('LTD', '').lower().title()
 
 @app.route('/insert_to_mongo')
 def insert_into_mongo():
+
     connector = sqlite3.connect('semos_companies_data.db')
     df = pd.read_sql("SELECT * FROM companies", con=connector)
     df = df.drop(['name'], axis=1)
@@ -43,6 +45,7 @@ def clear_data():
     df = pd.read_sql("SELECT * FROM companies", con = connector)
     df['company_name_cleaned']= df['name'].apply(transformString)
     df.to_sql(name = 'companies',if_exists = 'replace',con = connector, index = False)
+    #novo dobienite stringovi se zacuvuvaat vo kolonata company_name_cleaned
     return "Finished transforming the data and writing to SQL database"
 
 
